@@ -3,6 +3,10 @@ import 'package:prefman/src/prefman.dart';
 
 import 'option.dart';
 
+///
+/// if the [value] is valid returns [true]
+/// if it's invalid returns [false]
+///
 typedef ValueValidator<T> = bool Function(T value);
 
 ///
@@ -17,6 +21,10 @@ class Preference<T> with ChangeNotifier {
   final List<Option<T>>? options;
   late ValueValidator<T> _validator;
 
+  ///
+  /// default [Preference] constructor
+  /// you can implement your own custom [ValueValidator] for valid Preference values
+  ///
   Preference({
     required this.key,
     this.title,
@@ -27,6 +35,10 @@ class Preference<T> with ChangeNotifier {
     _validator = validator ?? (v) => true;
   }
 
+  ///
+  /// easy constructor for creating Preferences
+  /// where the selected value must be one of the options
+  ///
   Preference.options({
     required this.key,
     this.title,
@@ -44,6 +56,9 @@ class Preference<T> with ChangeNotifier {
     };
   }
 
+  ///
+  /// easy constructor for creating Preferences with no validators
+  ///
   Preference.any({
     required this.key,
     this.title,
