@@ -1,6 +1,6 @@
 name: prefman
-description: A new Flutter package.
-version: 0.1.0
+description: A Structured Way to manage App Prefernces
+version: 0.2.0
 author: aligator.ir@gmail.com
 homepage: https://github.com/ali2236/prefman
 

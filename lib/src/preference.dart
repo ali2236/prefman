@@ -5,6 +5,11 @@ import 'option.dart';
 
 typedef ValueValidator<T> = bool Function(T value);
 
+///
+/// You can think of this class as
+/// a persistent observable variable with validation
+/// can easily be used to create Setting UI using [title], [description], [options] & [getSelectedOption].
+///
 class Preference<T> with ChangeNotifier {
   final String key;
   final String? title, description;
@@ -30,8 +35,8 @@ class Preference<T> with ChangeNotifier {
     required this.options,
   }) {
     _validator = (value) {
-      for(var option in options!){
-        if(option.value == value){
+      for (var option in options!) {
+        if (option.value == value) {
           return true;
         }
       }
@@ -48,6 +53,9 @@ class Preference<T> with ChangeNotifier {
     _validator = (v) => true;
   }
 
+  ///
+  /// easy factory for creating boolean options
+  ///
   static Preference<bool> boolean({
     required String key,
     String? title,
@@ -63,6 +71,10 @@ class Preference<T> with ChangeNotifier {
     );
   }
 
+  ///
+  /// easy factory for creating integer range options
+  /// creates a validator for [min] <= value <= [max]
+  ///
   static Preference<int> integer(
       {required String key,
       String? title,
@@ -82,8 +94,17 @@ class Preference<T> with ChangeNotifier {
         });
   }
 
+  ///
+  /// returns the selected value if available
+  /// else it returns the default value
+  ///
   T get() => PrefMan().get(key) ?? defaultValue;
 
+  ///
+  /// if the value is determined valid by the validator
+  /// it gets saved and triggers a [notifyListeners]
+  /// else it doesn't
+  ///
   Future<void> setValue(T newValue) async {
     if (_validator(newValue)) {
       PrefMan().set(key, newValue);
@@ -91,6 +112,12 @@ class Preference<T> with ChangeNotifier {
     }
   }
 
+  ///
+  /// returns the selected option if exists
+  /// else it throws an exception
+  ///
+  /// make sure you are using a preference with options
+  ///
   Option<T> getSelectedOption() {
     if (options == null) throw 'No Options found for Preference(key: $key)';
     if (options!.isEmpty)

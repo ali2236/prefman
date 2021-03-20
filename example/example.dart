@@ -1,9 +1,10 @@
 import 'package:prefman/prefman.dart';
+import 'package:prefman/src/prefman.dart';
 
 var settings = AppPreferences();
 
 void main() async {
-  await settings.initialize();
+  await PrefMan.initialize();
   var username = settings.username.get();
   settings.username.setValue('new username');
 }
