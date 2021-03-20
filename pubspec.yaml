@@ -1,7 +1,6 @@
 name: prefman
 description: A better way to manage App Preferences using persistant variables in a Structured Way.
 version: 0.2.1
-author: aligator.ir@gmail.com
 homepage: https://github.com/ali2236/prefman
 
 environment:
