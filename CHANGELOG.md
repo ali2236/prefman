@@ -1,3 +1,7 @@
+## [0.2.2]
+
+* Support for nullable values
+
 ## [0.2.0]
 
 * use `PrefMan.initialize()` instead of `settings.initialize()`

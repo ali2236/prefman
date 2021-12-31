@@ -54,6 +54,7 @@ class PrefMan {
     if (value is double) return _sharedPreferences!.setDouble(key, value);
     if (value is List<String>)
       return _sharedPreferences!.setStringList(key, value);
+    if(value == null) return _sharedPreferences!.remove(key);
     throw 'Type ${value.runtimeType} is not a supported type';
   }
 
