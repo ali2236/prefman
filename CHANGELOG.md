@@ -1,6 +1,6 @@
-## [0.2.4]
+## [0.2.5]
 
-* Remove shared_preferences version constraint 
+* Update shared_preferences version
 
 ## [0.2.2]
 
