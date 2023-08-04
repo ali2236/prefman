@@ -1,3 +1,7 @@
+## [0.2.3]
+
+* Remove shared_preferences version constraint 
+
 ## [0.2.2]
 
 * Support for nullable values
