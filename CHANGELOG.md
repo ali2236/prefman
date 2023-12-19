@@ -1,3 +1,7 @@
+## [1.1.0]
+
+* all keys are prefixed with `prefman.`
+
 ## [1.0.0]
 
 * remove `shared_preferences` dependency

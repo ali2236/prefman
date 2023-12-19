@@ -109,11 +109,13 @@ class Preference<T> with ChangeNotifier {
         });
   }
 
+  String get _key => 'prefman.$key';
+
   ///
   /// returns the selected value if available
   /// else it returns the default value
   ///
-  T get() => PrefMan.driver.get(key) ?? defaultValue;
+  T get() => PrefMan.driver.get(_key) ?? defaultValue;
 
   ///
   /// if the value is determined valid by the validator
@@ -122,7 +124,7 @@ class Preference<T> with ChangeNotifier {
   ///
   Future<void> setValue(T newValue) async {
     if (_validator(newValue)) {
-      PrefMan.driver.set(key, newValue);
+      PrefMan.driver.set(_key, newValue);
       notifyListeners();
     }
   }
@@ -134,9 +136,9 @@ class Preference<T> with ChangeNotifier {
   /// make sure you are using a preference with options
   ///
   Option<T> getSelectedOption() {
-    if (options == null) throw 'No Options found for Preference(key: $key)';
+    if (options == null) throw 'No Options found for Preference(key: $_key)';
     if (options!.isEmpty)
-      throw 'Preference(key: $key) doesn\'t have any options';
+      throw 'Preference(key: $_key) doesn\'t have any options';
     final selected = get();
     return options!.firstWhere(
       (o) => o.value == selected,
