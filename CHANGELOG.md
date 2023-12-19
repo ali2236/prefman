@@ -1,3 +1,8 @@
+## [1.0.0]
+
+* remove `shared_preferences` dependency
+* added `PrefManDriver` which must be implemented and set using `PrefMan.setDriver`
+
 ## [0.2.5]
 
 * Update shared_preferences version

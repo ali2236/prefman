@@ -3,7 +3,6 @@ import 'package:prefman/prefman.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await PrefMan.initialize();
   runApp(VarApp());
 }
 

@@ -113,7 +113,7 @@ class Preference<T> with ChangeNotifier {
   /// returns the selected value if available
   /// else it returns the default value
   ///
-  T get() => PrefMan().get(key) ?? defaultValue;
+  T get() => PrefMan.driver.get(key) ?? defaultValue;
 
   ///
   /// if the value is determined valid by the validator
@@ -122,7 +122,7 @@ class Preference<T> with ChangeNotifier {
   ///
   Future<void> setValue(T newValue) async {
     if (_validator(newValue)) {
-      PrefMan().set(key, newValue);
+      PrefMan.driver.set(key, newValue);
       notifyListeners();
     }
   }

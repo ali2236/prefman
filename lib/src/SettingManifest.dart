@@ -1,5 +1,4 @@
 import 'package:prefman/src/preference.dart';
-import 'prefman.dart';
 
 ///
 /// enables easier grouping of Preferences and [backup] & [restore] functionality.
@@ -13,11 +12,6 @@ abstract class SettingManifest {
   /// its [Preference] is by a list Provided by the programmer.
   ///
   List<Preference> get preferences;
-
-  @Deprecated('use PrefMan.initialize() instead')
-  Future<void> initialize() async {
-    await PrefMan.initialize();
-  }
 
   ///
   /// a utility function for mapping preferences to a Map.

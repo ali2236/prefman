@@ -1,5 +1,5 @@
-import 'package:prefman/prefman.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:prefman/src/driver.dart';
+import 'package:prefman/src/drivers/in_momory_driver.dart';
 
 ///
 /// The Core Class of this library.
@@ -10,58 +10,28 @@ import 'package:shared_preferences/shared_preferences.dart';
 ///
 ///
 class PrefMan {
-  static PrefMan? _instance;
-  static SharedPreferences? _sharedPreferences;
 
-  PrefMan._();
+  static PrefManDriver _driver = PrefManInMemoryDriver();
 
-  factory PrefMan() {
-    if (_instance == null) {
-      _instance = PrefMan._();
-    }
-    return _instance!;
-  }
+  static PrefManDriver get driver => _driver;
 
   ///
-  /// Must be called before any use of Preferences.
+  /// call with PrefManDriver Implementation before any use of Preferences.
+  /// set to [PrefManInMemoryDriver] by default
   ///
   /// example:
   /// ```dart
   /// void main() async {
   //   WidgetsFlutterBinding.ensureInitialized();
-  //   await PrefMan.initialize();
+  //   final driver = PrefManSharedPreferenceDriver();
+  //   await driver.init();
+  //   PrefMan.setDriver(driver);
   //   // ...
   // }
   /// ```
   ///
-  static Future<void> initialize() async {
-    if (_sharedPreferences == null) {
-      _sharedPreferences = await SharedPreferences.getInstance();
-    }
+  static void setDriver(PrefManDriver driver) async {
+    _driver = driver;
   }
 
-  ///
-  /// returns value
-  ///
-  T? get<T>(String key) {
-    return _sharedPreferences!.get(key) as T?;
-  }
-
-  Future<bool> set(String key, dynamic value) {
-    if (value is bool) return _sharedPreferences!.setBool(key, value);
-    if (value is int) return _sharedPreferences!.setInt(key, value);
-    if (value is String) return _sharedPreferences!.setString(key, value);
-    if (value is double) return _sharedPreferences!.setDouble(key, value);
-    if (value is List<String>)
-      return _sharedPreferences!.setStringList(key, value);
-    if(value == null) return _sharedPreferences!.remove(key);
-    throw 'Type ${value.runtimeType} is not a supported type';
-  }
-
-  ///
-  /// Removes the value if exists
-  ///
-  Future<bool> remove(String key) {
-    return _sharedPreferences!.remove(key);
-  }
 }
