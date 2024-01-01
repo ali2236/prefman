@@ -1,3 +1,7 @@
+## [1.2.0]
+
+* remove `prefman.` prefix
+
 ## [1.1.0]
 
 * all keys are prefixed with `prefman.`
